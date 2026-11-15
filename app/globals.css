@@ -1,23 +1,210 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─── CSS Variables ─────────────────────────────────────── */
 :root {
-  --background: #0F0F0F;
-  --foreground: #FFFFFF;
+  --bg:        #080808;
+  --bg-2:      #111111;
+  --surface:   rgba(255,255,255,0.04);
+  --border:    rgba(255,255,255,0.08);
+
+  --cam:       #FF4D4D;
+  --cam-glow:  rgba(255,77,77,0.35);
+  --cam-soft:  rgba(255,77,77,0.08);
+
+  --phai:      #00C896;
+  --phai-glow: rgba(0,200,150,0.35);
+  --phai-soft: rgba(0,200,150,0.08);
+
+  --accent:    #FFB800;
+  --white:     #FFFFFF;
+  --muted:     rgba(255,255,255,0.4);
+  --subtle:    rgba(255,255,255,0.15);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Be Vietnam Pro', Inter, sans-serif;
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+/* ─── Custom Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+}
+
+/* ─── Glassmorphism Utilities ────────────────────────────── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .glass {
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
   }
+
+  .glass-strong {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .text-balance { text-wrap: balance; }
+
+  /* Gradient text */
+  .text-gradient-cam {
+    background: linear-gradient(135deg, #FF4D4D, #FF8C42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-phai {
+    background: linear-gradient(135deg, #00C896, #00E5B0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow rings */
+  .glow-cam  { box-shadow: 0 0 24px var(--cam-glow),  0 0 48px rgba(255,77,77,0.12); }
+  .glow-phai { box-shadow: 0 0 24px var(--phai-glow), 0 0 48px rgba(0,200,150,0.12); }
+
+  /* Noise texture overlay */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Press feedback */
+  .press {
+    transition: transform 0.1s cubic-bezier(0.34,1.56,0.64,1), opacity 0.1s;
+  }
+  .press:active { transform: scale(0.96); }
+}
+
+/* ─── Keyframe Animations ────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  100% { transform: scale(1.9);  opacity: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse-cam {
+  0%, 100% { box-shadow: 0 0 20px var(--cam-glow),  0 0 40px rgba(255,77,77,0.08); }
+  50%       { box-shadow: 0 0 32px var(--cam-glow),  0 0 64px rgba(255,77,77,0.18); }
+}
+
+@keyframes glow-pulse-phai {
+  0%, 100% { box-shadow: 0 0 20px var(--phai-glow), 0 0 40px rgba(0,200,150,0.08); }
+  50%       { box-shadow: 0 0 32px var(--phai-glow), 0 0 64px rgba(0,200,150,0.18); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.06); }
+}
+
+/* ─── Animation Classes ──────────────────────────────────── */
+.animate-fade-up        { animation: fade-up  0.5s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in        { animation: fade-in  0.4s ease both; }
+.animate-scale-in       { animation: scale-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-float          { animation: float    3s ease-in-out infinite; }
+.animate-count-up       { animation: count-up 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-slide-up       { animation: slide-up 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-bounce-soft    { animation: bounce-soft 0.4s ease; }
+.animate-glow-cam       { animation: glow-pulse-cam  2.5s ease-in-out infinite; }
+.animate-glow-phai      { animation: glow-pulse-phai 2.5s ease-in-out infinite; }
+
+/* Staggered delays */
+.delay-100  { animation-delay: 0.1s; }
+.delay-200  { animation-delay: 0.2s; }
+.delay-300  { animation-delay: 0.3s; }
+.delay-400  { animation-delay: 0.4s; }
+.delay-500  { animation-delay: 0.5s; }
+
+/* ─── Gradient Backgrounds ───────────────────────────────── */
+.bg-mesh-cam {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%,  rgba(255,77,77,0.12)   0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(255,77,77,0.06)   0%, transparent 60%),
+    var(--bg);
+}
+
+.bg-mesh-phai {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%,  rgba(0,200,150,0.10)   0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(0,200,150,0.05)   0%, transparent 60%),
+    var(--bg);
+}
+
+/* ─── Shimmer loader ─────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(255,255,255,0.10) 50%,
+    rgba(255,255,255,0.04) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* ─── Input focus glow ───────────────────────────────────── */
+input:focus-visible {
+  outline: none;
 }
