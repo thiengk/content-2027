@@ -4,7 +4,7 @@
 
 **Tên:** Dám Thử Không Nào  
 **Domain:** damthukhongnao.com / damthukhongnao.vn  
-**Concept:** Mỗi ngày một thử thách — cấm hoặc bắt buộc — cả cộng đồng cùng thực hiện trong 24 tiếng.  
+**Concept:** Mỗi ngày một thử thách — cấm hoặc bắt buộc — cả cộng đồng/ hoặc 1 cá nhân cùng thực hiện trong 24 tiếng.  
 **Đối tượng:** Gen Z Việt Nam, 18–28 tuổi, sống ở thành phố.  
 **Mô hình:** Website tạo thử thách hàng ngày + POV video chứng minh trải nghiệm thật.
 

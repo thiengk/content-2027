@@ -72,7 +72,7 @@ export default function MyChallengesPage() {
   /* ── Loading skeleton ──────────────────────────────────── */
   if (phase === "loading") {
     return (
-      <main className="min-h-screen flex items-center justify-center" style={{ background: "#080808" }}>
+      <main className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 rounded-full shimmer" />
           <div className="w-32 h-3 rounded-full shimmer" />
@@ -84,22 +84,17 @@ export default function MyChallengesPage() {
   return (
     <main
       className="min-h-screen flex flex-col items-center px-4 pb-6 pt-10 overflow-x-hidden"
-      style={{
-        background: hasChallenge
-          ? chosen?.type === "CAM"
-            ? `radial-gradient(ellipse 80% 50% at 15% 5%, rgba(255,77,77,0.10) 0%, transparent 55%), #080808`
-            : `radial-gradient(ellipse 80% 50% at 15% 5%, rgba(0,200,150,0.08) 0%, transparent 55%), #080808`
-          : `radial-gradient(ellipse 80% 50% at 50% 0%, rgba(100,100,255,0.06) 0%, transparent 55%), #080808`,
-      }}
     >
-      {/* Decorative orb */}
+      {/* Subtle per-page color accent on top of aurora */}
       <div
         aria-hidden
-        className="fixed -top-24 -left-24 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-25"
+        className="fixed inset-0 pointer-events-none"
         style={{
           background: hasChallenge
-            ? `radial-gradient(circle, ${primary}80 0%, transparent 70%)`
-            : "radial-gradient(circle, rgba(120,120,255,0.5) 0%, transparent 70%)",
+            ? chosen?.type === "CAM"
+              ? "radial-gradient(ellipse 70% 40% at 20% 10%, rgba(255,77,77,0.07) 0%, transparent 60%)"
+              : "radial-gradient(ellipse 70% 40% at 20% 10%, rgba(0,200,150,0.06) 0%, transparent 60%)"
+            : "none",
         }}
       />
 

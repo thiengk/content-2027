@@ -21,33 +21,15 @@ export default function Home() {
   return (
     <main
       className="min-h-screen flex flex-col items-center px-4 pb-6 pt-10 overflow-x-hidden"
-      style={{
-        background: isCAM
-          ? `radial-gradient(ellipse 90% 55% at 15% 5%,  rgba(255,77,77,0.11)  0%, transparent 55%),
-             radial-gradient(ellipse 60% 40% at 85% 90%, rgba(255,77,77,0.06)  0%, transparent 55%),
-             #080808`
-          : `radial-gradient(ellipse 90% 55% at 15% 5%,  rgba(0,200,150,0.09) 0%, transparent 55%),
-             radial-gradient(ellipse 60% 40% at 85% 90%, rgba(0,200,150,0.05) 0%, transparent 55%),
-             #080808`,
-      }}
     >
-      {/* Decorative orbs */}
+      {/* Subtle per-page color accent — blends on top of aurora */}
       <div
         aria-hidden
-        className="fixed -top-32 -left-32 w-80 h-80 rounded-full blur-[80px] pointer-events-none opacity-30"
+        className="fixed inset-0 pointer-events-none"
         style={{
           background: isCAM
-            ? "radial-gradient(circle, rgba(255,77,77,0.5) 0%, transparent 70%)"
-            : "radial-gradient(circle, rgba(0,200,150,0.4) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-20"
-        style={{
-          background: isCAM
-            ? "radial-gradient(circle, rgba(255,140,66,0.6) 0%, transparent 70%)"
-            : "radial-gradient(circle, rgba(0,229,176,0.5) 0%, transparent 70%)",
+            ? "radial-gradient(ellipse 70% 40% at 20% 10%, rgba(255,77,77,0.08) 0%, transparent 60%)"
+            : "radial-gradient(ellipse 70% 40% at 20% 10%, rgba(0,200,150,0.07) 0%, transparent 60%)",
         }}
       />
 
